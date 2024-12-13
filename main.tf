@@ -100,7 +100,8 @@ resource "oci_database_autonomous_database" "autonomous_database" {
   #is_shrink_only                         = var.is_shrink_only
   lifecycle {
     ignore_changes = [
-      defined_tags["IT.create_date"]
+      # due to a bug on database_edition parameter it was added on ignore_changes
+      defined_tags["IT.create_date"], database_edition
     ]
   }
   timeouts {
@@ -115,7 +116,7 @@ resource "oci_identity_policy" "autonomous_database_policy" {
   depends_on = [oci_database_autonomous_database.autonomous_database]
   for_each = {
     for group in var.groups : group => group
-    if var.enable_group_access && var.groups != []
+    if var.groups != [] && var.compartment != null
   }
   compartment_id = var.compartment_id
   name           = "policy_${var.display_name}"

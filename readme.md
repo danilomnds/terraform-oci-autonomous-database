@@ -154,9 +154,8 @@ output "autonomous-database-id" {
 | switchover_to_remote_peer_id | It is applicable only when dataguard_region_type and role are set, and is_dedicated is false | `string` | n/a | No |
 | rotate_key_trigger | An optional property when flipped triggers rotation of KMS key. It is only applicable on dedicated databases i.e. where is_dedicated is true | `string` | n/a | No |
 | is_shrink_only | An optional property when enabled triggers the Shrinking of Autonomous Database once | `bool` | n/a | No |
-| groups | list of azure AD groups that will manage objects inside the bucket | `list(string)` | n/a | No |
+| groups | list of azure AD groups that will manage objects inside the bucket | `list(string)` | `[]` | No |
 | compartment | compartment name that will be used for policy creation | `string` | n/a | No |
-| enable_group_access | enables the policy creation. If true the groups var should have a least one value | `bool` | `true` | No |
 
 # Object variables for blocks
 
